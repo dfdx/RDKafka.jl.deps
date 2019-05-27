@@ -37,7 +37,7 @@ platforms = [
     Linux(:x86_64, libc=:musl),
     Linux(:aarch64, libc=:musl),
     Linux(:armv7l, libc=:musl, call_abi=:eabihf),
-    MacOS(:x86_64),
+    # MacOS(:x86_64),
     FreeBSD(:x86_64)
 ]
 

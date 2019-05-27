@@ -33,7 +33,7 @@ platforms = [
     Linux(:x86_64, libc=:glibc),
     Linux(:aarch64, libc=:glibc),
     Linux(:powerpc64le, libc=:glibc),
-    Linux(:i686, libc=:musl),
+    # Linux(:i686, libc=:musl),
     Linux(:x86_64, libc=:musl),
     Linux(:aarch64, libc=:musl),
     Linux(:armv7l, libc=:musl, call_abi=:eabihf),

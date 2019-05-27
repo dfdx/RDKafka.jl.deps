@@ -1,0 +1,39 @@
+language: julia
+os:
+  - linux
+julia:
+  - 1.0
+notifications:
+  email: false
+git:
+  depth: 99999999
+cache:
+  timeout: 1000
+  directories:
+    - downloads
+env:
+  global:
+    - BINARYBUILDER_DOWNLOADS_CACHE=downloads
+    - BINARYBUILDER_AUTOMATIC_APPLE=false
+sudo: required
+
+# Before anything else, get the latest versions of things
+before_script:
+  - julia -e 'using Pkg; pkg"add BinaryProvider"; pkg"add BinaryBuilder#master"; Pkg.build()'
+
+script:
+  - julia build_tarballs.jl
+
+
+deploy:
+    provider: releases
+    api_key:
+        # Note; this api_key is only valid for dfdx/RDKafka.jl.deps; you need
+        # to make your own: https://docs.travis-ci.com/user/deployment/releases/
+        secure: hXtlPv3wBNF6enk3AY7Y2p8Nx8wEYmxoC5BEhGyLCSExNmqjxyjWj64K+r4r37O2+JfXORhyFA18omG4ZUe2DNCJSM3Hy7wI6tmJEOF6UphivYuY04hJI3oE9TrcpT3cZ8AJdWig5f8DfzHD+m5q+iEx83Ibw0xmDPu/OS9ws/ISjBQb4Org2G5v+zuYUeoqK57n1qwFRVaPlm5y8zcr/jqaFiTheimXyZGwlwugvt5ol1Y5QzPAYE7GUjvIiYof/mcafz3uJgIeh1RkBmDF3cL1N7r0YlizV0/8utviihsY47g10UPUe78Q0ERH9rMcMMjkRTRwZi8KjarBgc16B/K4r0FbHLjfm7Uxhi41b0Hecp8krW3sdDoHdvdlyzvc7bD20aNjKhFzpaRNBVVRXC3cZ8VFJlq+9oYMBdGUAePDLKFmkoLTC2OV4fubnIGV/mI9HvLf7kOlLRXSkt7YYfvk9kV7SX7fKu2g1u+UnFkbAm6f18G4uQr7J9n8gvweK53HjlR9FOBv9X0FRiS9wsH+PgD99mVo5+X09uik28bcNCKIVVsHbr4OqRZYTK18pwBPLVTXMLA9djwQqqT0azUGoO/NchgrxkesU9Z7nWuz6twCSF3GRy7XWVIzUwVdYsG5lKNAj2Yitzl2f5gv8fxvtUZ6KqujVJCNWvnVveI=
+    file_glob: true
+    file: products/*
+    skip_cleanup: true
+    on:
+        repo: dfdx/RDKafka.jl.deps
+        tags: true

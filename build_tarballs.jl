@@ -18,10 +18,10 @@ cd $WORKSPACE/srcdir
 cd librdkafka-1.0.0/
 ./configure 
 make
-cp src/librdkafka*.so $prefix/
-cp src/librdkafka*.so.1 $prefix/
-cp src/librdkafka*.dll $prefix/
-cp src/librdkafka*.dylib $prefix
+cp src/librdkafka*.so $prefix/ || true
+cp src/librdkafka*.so.1 $prefix/ || true
+cp src/librdkafka*.dll $prefix/ || true
+cp src/librdkafka*.dylib $prefix || true
 exit
 
 """
@@ -29,11 +29,11 @@ exit
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
 platforms = [
-    # Linux(:i686, libc=:glibc),
+    Linux(:i686, libc=:glibc),
     Linux(:x86_64, libc=:glibc),
     Linux(:aarch64, libc=:glibc),
     Linux(:powerpc64le, libc=:glibc),
-    # Linux(:i686, libc=:musl),
+    Linux(:i686, libc=:musl),
     Linux(:x86_64, libc=:musl),
     Linux(:aarch64, libc=:musl),
     Linux(:armv7l, libc=:musl, call_abi=:eabihf),

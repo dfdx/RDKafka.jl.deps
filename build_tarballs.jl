@@ -7,15 +7,14 @@ version = v"0.1.0"
 
 # Collection of sources required to build librdkafka_build
 sources = [
-    "https://github.com/edenhill/librdkafka/archive/v1.0.0.tar.gz" =>
-    "b00a0d9f0e8c7ceb67b93b4ee67f3c68279a843a15bf4a6742eb64897519aa09",
-
+    "https://github.com/edenhill/librdkafka/archive/v2.5.3.tar.gz" =>
+    "eaa1213fdddf9c43e28834d9a832d9dd732377d35121e42f875966305f52b8ff",
 ]
 
 # Bash recipe for building across all platforms
 script = raw"""
 cd $WORKSPACE/srcdir
-cd librdkafka-1.0.0/
+cd librdkafka-2.5.3/
 ./configure 
 make
 cp src/librdkafka*.so $prefix/ || true
